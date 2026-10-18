@@ -1,28 +1,20 @@
 // Write your code here!
+
 async function fetchPosts() {
     try {
-        const response = await fetch (
-           " https://jsonplaceholder.typicode.com "
-        );
+        const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+        const posts = await response.json();
 
-if (!response.ok) {
-    throw new error ("failed to fetch posts");
-}
-
-const posts = await response.json();
-
-displayPosts(posts);
+        displayPosts(posts);
+    } catch (error) {
+        console.error("error fetching posts;", error);
     }
-catch (error) {
-    console.error("error fetching posts;", error);
 }
-    }
-    
 
 function displayPosts(posts) {
-    const postList = document.getElementById ("post-list");
+    const postList = document.getElementById("post-list");
 
-    posts.forEach (function(post){
+    posts.forEach((post) => {
         const li = document.createElement("li");
 
         const h1 = document.createElement("h1");
@@ -34,8 +26,8 @@ function displayPosts(posts) {
         li.appendChild(h1);
         li.appendChild(p);
 
-           postList.appendChild(li);
+        postList.appendChild(li);
     });
 }
-   
+
 fetchPosts();
